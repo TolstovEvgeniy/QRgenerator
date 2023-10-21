@@ -1,12 +1,10 @@
 from tkinter import *
 
 
-class Widget:
+class TopFrame:
     def __init__(self, root):
         self.root = root
         self.top_frame = LabelFrame(self.root, text='Параметры QR')
-        self.bottom_frame = LabelFrame(self.root, text='Просмотр QR')
-
         self.frame_1 = Frame(self.top_frame, padx=10, pady=10)
         self.frame_2 = Frame(self.top_frame)
         self.frame_3 = Frame(self.top_frame)
@@ -20,8 +18,6 @@ class Widget:
         self.var_type_int = IntVar()
         self.var_room_int = IntVar()
         self.var_date_int = IntVar()
-
-        # b1 = Button(self.top_frame, text='asd', command=lambda:print(self.int_var_free.get())).pack()
 
         self.free_label = Label(self.frame_1, text='Свободный текст:', font='System 11 bold', width=16, anchor=E)
         self.organization_label = Label(self.frame_2, text='Организация:', font='System 11 bold', width=16, anchor=E)
@@ -38,7 +34,8 @@ class Widget:
         self.date_entry = Entry(self.frame_6, width=30, state=DISABLED)
 
         self.free_check = Checkbutton(self.frame_1, anchor=E, variable=self.var_free_int, command=self.entry_enable)
-        self.organization_check = Checkbutton(self.frame_2, anchor=E, variable=self.var_organization_int, command=self.entry_enable)
+        self.organization_check = Checkbutton(self.frame_2, anchor=E, variable=self.var_organization_int,
+                                              command=self.entry_enable)
         self.index_check = Checkbutton(self.frame_3, anchor=E, variable=self.var_index_int, command=self.entry_enable)
         self.type_check = Checkbutton(self.frame_4, anchor=E, variable=self.var_type_int, command=self.entry_enable)
         self.room_check = Checkbutton(self.frame_5, anchor=E, variable=self.var_room_int, command=self.entry_enable)
@@ -46,10 +43,7 @@ class Widget:
 
         self.free_check.toggle()
 
-        self.label_value_qr = Label(self.bottom_frame, text='"Расшифровка QR"', relief=SOLID)
-        self.label_image_qr = Label(self.bottom_frame, text='Картинка QR', relief=RIDGE, padx=100, pady=127)
-
-    def draw_widget(self):
+    def draw_top_frame(self):
         self.top_frame.pack(anchor=N, fill=BOTH, padx=5, pady=5)
 
         self.frame_1.pack()
@@ -80,10 +74,6 @@ class Widget:
         self.room_check.pack(side=LEFT)
         self.date_check.pack(side=LEFT)
 
-        self.bottom_frame.pack(fill=BOTH, expand=1, padx=5, pady=5)
-        self.label_value_qr.pack(fill=X, padx=5, pady=5)
-        self.label_image_qr.pack(padx=5, pady=5)
-
     def entry_enable(self):
         list_entry_var = [
             self.var_free_int,
@@ -111,3 +101,16 @@ class Widget:
             else:
                 list_entry[elem].delete(0, END)
                 list_entry[elem].config(state=DISABLED)
+
+
+class BottomFrame:
+    def __init__(self, root):
+        self.root = root
+        self.bottom_frame = LabelFrame(self.root, text='Просмотр QR')
+        self.label_value_qr = Label(self.bottom_frame, text='"Расшифровка QR"', relief=SOLID)
+        self.label_image_qr = Label(self.bottom_frame, text='Картинка QR', relief=RIDGE, padx=100, pady=127)
+
+    def draw_bottom_frame(self):
+        self.bottom_frame.pack(fill=BOTH, expand=1, padx=5, pady=5)
+        self.label_value_qr.pack(fill=X, padx=5, pady=5)
+        self.label_image_qr.pack(padx=5, pady=5)

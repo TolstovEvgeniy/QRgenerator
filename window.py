@@ -1,9 +1,7 @@
 from tkinter import *
 
-#from PIL import Image, ImageTk
-#from tkinter import filedialog
 from menu import MenuBar
-from widget import Widget
+from widget import *
 from tkinter import messagebox
 
 
@@ -15,11 +13,13 @@ class Window:
         self.root.minsize(400, 500)
         self.root.protocol("WM_DELETE_WINDOW", self.exit)
         self.menu_bar = MenuBar(self.root)
-        self.widget = Widget(self.root)
+        self.top_frame = TopFrame(self.root)
+        self.bottom_frame = BottomFrame(self.root)
 
     def run(self):
         self.menu_bar.draw_menu()
-        self.widget.draw_widget()
+        self.top_frame.draw_top_frame()
+        self.bottom_frame.draw_bottom_frame()
         self.root.mainloop()
 
     #def open_new_image(self):
