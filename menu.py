@@ -15,4 +15,4 @@ class MenuBar:
 
     @staticmethod
     def show_info():
-        messagebox.showinfo('Информация', 'Версия приложения: 0.1.13')
+        messagebox.showinfo('Информация', 'Версия приложения: 0.23.2')

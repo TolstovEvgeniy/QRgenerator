@@ -1,6 +1,5 @@
-from tkinter import *
-
 from menu import MenuBar
+from buttons import Buttons
 from widget import *
 from tkinter import messagebox
 
@@ -14,23 +13,22 @@ class Window:
         self.root.protocol("WM_DELETE_WINDOW", self.exit)
         self.menu_bar = MenuBar(self.root)
         self.top_frame = TopFrame(self.root)
+        self.button = Button(self.root, text='Сгенерировать QR', command=self.button_generator)
         self.bottom_frame = BottomFrame(self.root)
+
+    def button_generator(self):
+        self.top_frame.get_values_date()
+        qrsingl.value_to_string()
+        self.bottom_frame.output_value()
+        qrsingl.qr_make()
+        self.bottom_frame.lable_image_value()
 
     def run(self):
         self.menu_bar.draw_menu()
         self.top_frame.draw_top_frame()
+        self.button.pack()
         self.bottom_frame.draw_bottom_frame()
         self.root.mainloop()
-
-    #def open_new_image(self):
-        #image_path = filedialog.askopenfilename(filetypes=(('Images', '*.jpeg;*.jpg;*.png'),))
-        #image = Image.open(image_path)
-
-        #image_resize = image.resize((300, 300))
-
-        #image_tk = ImageTk.PhotoImage(image_resize)
-        #self.label_image_qr.configure(image=image_tk)
-        #self.label_image_qr.image = image_tk
 
     def exit(self):
         if messagebox.askyesno('Выход', 'Вы действительно хотите выйти из приложения?'):
